@@ -1,0 +1,189 @@
+H0: Hipotesis nula (representa no cambiar nada)
+Ha: Hipotesis alternativa
+
+Error de tipo I: Rechazar H0 cuando es verdadera
+Error de tipo II: No rechazar H0 cuando Ha es verdadera
+
+alfa = nivel de significación, comunmente 0.05
+p > alfa -> Se falla en rechazar la hipotesis nula
+p < alfa -> se rechaza la hipotesis nula en favor de la hipotesis alternativa
+
+**** Pruebas inferenciales con medias muestrales ****
+
+*** Prueba Z ***
+Condiciones de aplicacion:
+- Muestra de al menos 30 observaciones, si es de menos de 30
+  se debe conocer la varianza de la población
+- Las observaciones deben ser independientes, es decir que la elección de una observación para la muestra no influye en la selección de las otras.
+- La población de donde se obtuvo la muestra sigue aproximadamente una distribución normal.
+
+-No es muy utilizada
+
+*** Prueba T student ***
+- Es igual que la Z, pero se usa más debido a que no siempre se conoce la desviacion de la población o las muestras son pequeñas < 30
+
+Condiciones de aplicacion:
+1. Las observaciones son independientes entre sí:
+	- Como las muestras fueron elegidas al azar, se puede asumir que son independientes.
+	- Como las muestras fueron obtenidas mediante un estudio confiable, y represente menos del 10% de la población total, se puede asumir que las observaciones son independientes.
+2. Las observaciones provienen de una distribución cercana a la normal:
+	- Crear un gráfico Q-Q y ver si existen valores atípicos. No se observan valores atípicos que se alejen de la región aceptable.
+	- También se puede aplicar una prieba de Shapiro-Wilk: shapiro.test (diferencia) Si p > alfa-> se puede asumir que la diferencia en los tiempos de ejecución se acerca razonablemente a una distribución normal.
+		H0 de shapiro = corresponde a una distribucion cercana a la normal, Ha: no corresponde a una distribución cercana a la normal.
+
+Ejemplos de hipotesis:
+
+H0: la media de las utilidades mensuales de la empresa mu es de 20 millones de pesos, es decir: mu = 20 [M$].
+HA: las utilidades mensuales de la empresa son, en promedio, distintas de 20 millones de pesos, es decir: mu != 20 [M$].
+H0: mu = 20
+Ha: mu != 20
+
+H0: el tiempo promedio que tarda el algoritmo en resolver una instancia del problema es igual a 500 milisegundos.
+HA: el tiempo promedio que tarda el algoritmo en resolver una instancia del problema es inferior a 500
+milisegundos.
+H0: mu = 500
+Ha: mu < 500
+
+H0: la media de las diferencias en los tiempos de ejecución es igual a 0.
+HA: la media de las diferencias en los tiempos de ejecución es distinta de 0.
+H0: muDif = 0
+HA: muDif != 0
+
+H0: no hay diferencia entre la efectividad promedio de ambas vacunas.
+HA: la vacuna A es, en promedio, más efectiva que la B.
+H0: muA = muB
+HA: muA > muB
+
+***** Poder *****
+Poder: la probabilidad de correctamente rechazar H0 cuando es falsa (1 - beta).
+Tamaño del efecto: a diferencia entre dos grupos, o del valor observado con respecto al valor nulo.
+- El poder de la prueba aumenta mientras mayor es el tamaño del efecto (en este caso, la distancia entre el valor nulo y la media de la muestra).
+- A medida que el tamaño del efecto disminuye (es decir, el estimador se acerca al valor nulo), el poder se aproxima al nivel de significación.
+- Usar un valor de α más exigente (menor), manteniendo constante el tamaño de la muestra, hace que la curva de poder sea más baja para cualquier tamaño del efecto (lo que verifica la relación entre α y β).
+- Usar una muestra más grande aumenta el poder de la prueba para cualquier tamaño del efecto distinto de 0.
+
+**** Pruebas inferenciales con Proporciones muestrales ****
+Se usa el estimador puntual p(gorro) que es la proporción de exito de la muestra
+este se distribuye de manera cercana a la normal con las siguientes condiciones:
+
+1. Las observaciones de la muestra son independientes.
+2. Se cumple la condición de éxito-fracaso, que establece que se espera observar al menos 10 observaciones correspondientes a éxito y al menos 10, correspondientes a fracasos. Matemáticamente, np ≥ 10
+y n(1 − p) ≥ 10.
+
+ **Método de Wald**
+Condición: debe cumplir que la distribución de p gorro sea cercana a la normal
+o sea condición 1 y 2 presentadas recién.
+
+ ** Wald para dos proporciones**
+Condiciones
+1. Cada proporción, por separado, sigue el modelo normal.
+2. Las dos muestras son independientes una de la otra.
+
+** Método de wilson **
+Igual que wald pero mejor.
+
+--------Ejemplos de hipotesis: -----
+
+H0: el 70% de las instancias se ejecutan en menos de 25 segundos.
+HA: más del 70% de las instancias se ejecutan en menos de 25 segundos.
+De acuerdo a las hipótesis formuladas por el jefe de Baeza, el valor nulo es p0 = 0; 7, con lo que estas pueden formularse matemáticamente como:
+Denotando como p a la proporción de todas las instancias de tamaño 100.000 que se ejecutan en menos de 25 segundos y considerando el valor hipotético p0 = 0.7 para este parámetro:
+H0: p = p0(0.7)
+HA: p > p0(0.7)
+
+H0: no hay diferencia en la tasa de reprobación de hombres y mujeres.
+HA: las tasas de reprobación son diferentes para hombres y mujeres.
+Matemáticamente:
+Denotando como p1 y p2 a las proporciones de hombres y mujeres, respectivamente, que reprueban la asignatura de programación la primera vez que la cursan:
+H0: p1 - p2 = 0
+HA: p1 - p2 != 0
+
+H0: la tasa de reprobación de los hombres es exactamente 10% más alta que la de las mujeres.
+HA: la tasa de reprobación de los hombres es más de 10% más alta que la de las mujeres.
+Matemáticamente:
+Denotando como p1 y p2 a las proporciones de hombres y mujeres, respectivamente, que reprueban la asignatura de física estudiada la primera vez que la cursan:
+H0: p1 - p2 = 0.1
+HA: p1 - p2 > 0.1
+
+** Poder y pruebas de proporciones **
+Es posible calcular el poder ya que se relaciona con pruebas de proporciones
+ver libro capitulo 7.3
+
+****** Pruebas de inferencia no paramétricas con proporciones ******
+No se hacen suposiciones sobre la distribución de la población
+y no se menciona parámetro alguno en las hipotesis.
+
+**PRUEBA CHI-CUADRADO **
+Para inferir con proporciones cuando disponemos de dos variables categóricas y una de ellas es dicotómica (es decir, tiene solo dos niveles o solo puede tomar dos valores).
+
+Condiciones:
+1. Las observaciones deben ser independientes entre sí.
+2. Debe haber a lo menos 5 observaciones esperadas en cada grupo.
+Estas condiciones se deben cumplir para cada grupo de pruebas chi-cuadrado
+
+--------- Prueba chi-cuadrado de homogeneidad --------
+Se usa para determinar si dos poblaciones (la variable dicotómica) presentan las mismas proporciones en los diferentes niveles de una variable categórica. Ej: ¿Son similares las preferencias de lenguaje de programación entre hombres y mujeres? (En este caso las variable dicotomica es hombre-mujer)
+
+hipótesis:
+H0: programadores hombres y mujeres tienen las mismas preferencias en lenguaje de programación favorito (ambas poblaciones muestras las mismas proporciones para cada lenguaje estudiado).
+HA: programadores hombres y mujeres tienen preferencias distintas en lenguajes de programación favorito.
+
+--------- Prueba chi-cuadrado de bondad de ajuste ---------
+permite comprobar si una distribución de frecuencias observada se asemeja a una
+distribución esperada. Usualmente se emplea para comprobar si una muestra es representativa de la
+población.  
+Ej: "...Ante el inminente riesgo de movilizaciones, el gerente necesita demostrar que el grupo seleccionado es una muestra representativa de sus programadores."
+
+En este ejemplo, las hipótesis a contrastar son:
+H0: las proporciones de especialistas en cada lenguaje son las mismas para la nómina y la muestra.
+HA: las proporciones de especialistas en cada lenguaje son diferentes en la nómina que en la muestra.
+
+Conclusión:La muestra seleccionada o tomada si es representativa de la nomina
+
+--------- Prueba chi-cuadrado de independencia ---------
+Permite determinar si dos variables categóricas, de una misma población, son estadísticamente independientes o si, por el contrario, están relacionadas.
+
+En este caso, las hipótesis a docimar son:
+H0: las variables clase y forma del sombrero son independientes.
+HA: las variables clase y forma del sombrero están relacionadas.
+ * Tomado del ejemplo de si la forma del sombrero de una planta tiene relación 
+	a que sea venenoso o comestible.
+
+************* Pruebas para muestras pequeñas *****************
+chi-cuadrado tiene la condición de que las observaciones esperadas para cada
+grupo al menos son 5, cuando esto no se cumple se pueden aplicar las siguientes
+pruebas  como alternativa:
+
+--------- Prueba exacta de Fisher ---------
+Alternativa a la prueba χ2 de independencia en el caso de que ambas variables sean dicotómicas. Así, las hipótesis a contrastar son:
+H0: las variables son independientes.
+HA: las variables están relacionadas.
+
+--------- Prueba de mcNemar ---------
+Apropiada cuando una misma característica, con respuesta dicotómica, se mide en dos ocasiones diferentes para los mismos sujetos (muestras pareadas) y queremos determinar si se produce o no un cambio significativo entre ambas mediciones. 
+Las hipótesis asociadas a la prueba de mcNemar son:
+H0: no hay cambios significativos en las respuestas.
+HA: sí hay cambios significativos en las respuestas.
+* Ejemplo del cambio de opinión de personas antes y despues de ver un debate
+* o del cambio en desempeño de un algoritmo dados dos módelos
+
+--------- PRUEBA Q DE COCHRAN ---------
+Es una extensión de la prueba de mcNemar, adecuada cuando la variable de respuesta es dicotómica y la variable independiente tiene más de dos observaciones pareadas (cuando ambas variables son dicotómicas, esta prueba es equivalente a la de mcNemar).
+
+Las hipótesis contrastadas por la prueba Q de Cochran son:
+
+H0: la proporción de “éxitos” es la misma para todos los grupos.
+HA: la proporción de “éxitos” es distinta para al menos un grupo.
+
+Condiciones:
+1. La variable de respuesta es dicotómica.
+2. La variable independiente es categórica.
+3. Las observaciones son independientes entre sí.
+4. El tamaño de la muestra es lo suficientemente grande. Glen (2016a) sugiere que n · k ≥ 24, donde n es
+el tamaño de la muestra (la cantidad de instancias, para el ejemplo) y k, la cantidad de niveles en la
+variable independiente.
+
+La aplicación de la prueba Q de Cochran es llamada prueba omnibus
+en el caso de que esta prueba omnibus rechace la hipotesis nula en favor de la alternativa (alfa < 0.05) se debe hacer siempre el procedimiento post-hoc o posteriori
+para esto revisar parte 8.3 del libro
+
